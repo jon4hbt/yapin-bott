@@ -1,0 +1,9 @@
+{
+  "name": "yapin-bott",
+  "version": "1.0.0",
+  "type": "module",
+  "main": "starter.js",
+  "scripts": {
+    "start": "node starter.js"
+  }
+}
