@@ -62,7 +62,6 @@ async function sendWelcome(userId) {
     )
     .color('#FFB6C1')
     .thumbnail(WELCOME_IMAGE)
-    .image(WELCOME_IMAGE)
     .footer('angelcore • soft vibes only');
 
   await bot.send(WELCOME_CH, 
@@ -122,7 +121,6 @@ bot.on('reaction_add', async (r) => {
         .description(`<@${r.user_id}> just joined angelcore ♡`)
         .color('#FFB6C1')
         .thumbnail(UPDATE_IMAGE)
-        .image(UPDATE_IMAGE)
         .footer('angelcore');
 
       await bot.send(UPDATES_CH, `₊˚⊹ ʚ♡ɞ @everyone, a new angel has joined ʚ♡ɞ ⊹˚₊\n♡ ˚ . everyone welcome <@${r.user_id}> . ˚ ♡`, { embeds: [updateEmbed] });
