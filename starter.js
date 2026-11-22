@@ -61,10 +61,9 @@ async function sendWelcome(userId) {
       `♡ ₊˚ ﹒ hope you enjoy your stay ﹒ ˚₊ ♡`
     )
     .color('#FFB6C1')
+    .image(WELCOME_IMAGE)
     .footer('angelcore • soft vibes only');
 
-  // GIF FIRST, then the welcome
-  await bot.send(WELCOME_CH, WELCOME_IMAGE);
   await bot.send(WELCOME_CH, 
     `₊˚⊹ ୨୧ ♡ welc <@${userId}> to ⋆｡‧˚ʚ ᵃⁿᵍᵉˡᶜᵒʳᵉ ɞ˚‧｡⋆ @welcome ping !!\n` +
     `-₊˚⊹・𝓇𝓊𝓁ℯ𝓈 | read before you speak\n` +
@@ -121,10 +120,9 @@ bot.on('reaction_add', async (r) => {
         .title('₊˚⊹ ʚ♡ɞ a new angel joined ʚ♡ɞ ⊹˚₊')
         .description(`<@${r.user_id}> just joined angelcore ♡`)
         .color('#FFB6C1')
+        .image(UPDATE_IMAGE)
         .footer('angelcore');
 
-      // GIF FIRST, then the announce
-      await bot.send(UPDATES_CH, UPDATE_IMAGE);
       await bot.send(UPDATES_CH, `₊˚⊹ ʚ♡ɞ @everyone, a new angel has joined ʚ♡ɞ ⊹˚₊\n♡ ˚ . everyone welcome <@${r.user_id}> . ˚ ♡`, { embeds: [updateEmbed] });
 
       userPicks.delete(r.user_id);
