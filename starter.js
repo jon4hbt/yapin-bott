@@ -2,8 +2,8 @@ import { Bot, Embed } from './yapper.js';
 
 // ---- Mack_2435 - angelcore verify-by-roles ----
 
-const WELCOME_IMG = 'https://files.yapper.website/attachments/ecdfb5fc-8862-4173-9121-acfd26b9d5a3/r2-1795311219548-46ldo3sx4s7zwh6njmox-t.webp';
-const UPDATES_IMG = 'https://files.yapper.website/attachments/ecdfb5fc-8862-4173-9121-acfd26b9d5a3/r2-1795311567047-wugp5ptxcrwxw5zabs8r-t.webp';
+const WELCOME_IMG = 'https://files.yapper.website/attachments/ecdfb5fc-8862-4173-9121-acfd26b9d5a3/r2-1795311219548-46ldo3sx4s7zwh6njmox.webp';
+const UPDATES_IMG = 'https://files.yapper.website/attachments/ecdfb5fc-8862-4173-9121-acfd26b9d5a3/r2-1795311567047-wugp5ptxcrwxw5zabs8r.webp';
 
 const GUILD_ID = '1e8356db-1b9f-4083-a075-25363a8a8607';
 const WELCOME_CHANNEL = 'b5e35ad5-6f23-4384-ad4e-6b09fd2199bc';
@@ -15,37 +15,35 @@ const MEMBER_ROLE = '314d903c-25ce-4d7a-9975-508a36adae88';
 
 // ---- roles ----
 const GENDER_IDS = [
-  'f16fc0a6-8645-4bdb-88ae-48594502568b', // female
-  '456aa22a-56dd-4a30-b932-5526e8eb6df3', // male
-  '5fa57823-4de2-4a7f-9813-b76d1ff841c0', // non-binary
-  '782c1ebf-d759-4d2e-8403-e7efe6b810b1', // genderfluid
-  'ab2f95e3-a247-403f-aeb7-69831086be96', // ask / other
+  'f16fc0a6-8645-4bdb-88ae-48594502568b',
+  '456aa22a-56dd-4a30-b932-5526e8eb6df3',
+  '5fa57823-4de2-4a7f-9813-b76d1ff841c0',
+  '782c1ebf-d759-4d2e-8403-e7efe6b810b1',
+  'ab2f95e3-a247-403f-aeb7-69831086be96',
 ];
 
 const SEXUALITY_IDS = [
-  'c613876c-42c1-4966-925b-767f5c6a2fdb', // straight
-  'f7ef576e-3443-422c-8ce6-d48fb19fb0a6', // gay
-  '29f19a50-59c8-4cd7-b091-7c2117d67fbc', // lesbian
-  '0b1d76f2-f6b9-4e4f-8871-e20709c74dc1', // bi
-  '469c2136-402f-46bd-96bb-61c43b738d31', // trans
-  'be209300-01c7-4247-866c-e71165441bb8', // pan
-  '11afff7d-9411-45da-bdea-52bd112f960b', // ace / aro
-  '0adc7c2f-21b9-4724-b930-8284f5c3b5c1', // queer / questioning
+  'c613876c-42c1-4966-925b-767f5c6a2fdb',
+  'f7ef576e-3443-422c-8ce6-d48fb19fb0a6',
+  '29f19a50-59c8-4cd7-b091-7c2117d67fbc',
+  '0b1d76f2-f6b9-4e4f-8871-e20709c74dc1',
+  '469c2136-402f-46bd-96bb-61c43b738d31',
+  'be209300-01c7-4247-866c-e71165441bb8',
+  '11afff7d-9411-45da-bdea-52bd112f960b',
+  '0adc7c2f-21b9-4724-b930-8284f5c3b5c1',
 ];
 
 const AGE_IDS = [
-  'ca17b549-0174-4995-8a28-49c977e3eb66', // 18
-  '290a44c2-d62e-4c05-8f3f-3bec0ab15c5f', // 18-24
+  'ca17b549-0174-4995-8a28-49c977e3eb66',
+  '290a44c2-d62e-4c05-8f3f-3bec0ab15c5f',
 ];
 
 const EMOJI_TO_ROLE = {
-  // gender
   '🌸': 'f16fc0a6-8645-4bdb-88ae-48594502568b',
   '💙': '456aa22a-56dd-4a30-b932-5526e8eb6df3',
   '💛': '5fa57823-4de2-4a7f-9813-b76d1ff841c0',
   '💜': '782c1ebf-d759-4d2e-8403-e7efe6b810b1',
   '❔': 'ab2f95e3-a247-403f-aeb7-69831086be96',
-  // sexuality
   '💗': 'c613876c-42c1-4966-925b-767f5c6a2fdb',
   '🌈': 'f7ef576e-3443-422c-8ce6-d48fb19fb0a6',
   '🧡': '29f19a50-59c8-4cd7-b091-7c2117d67fbc',
@@ -54,10 +52,8 @@ const EMOJI_TO_ROLE = {
   '🩷': 'be209300-01c7-4247-866c-e71165441bb8',
   '🖤': '11afff7d-9411-45da-bdea-52bd112f960b',
   '🤍': '0adc7c2f-21b9-4724-b930-8284f5c3b5c1',
-  // age
   '✨': 'ca17b549-0174-4995-8a28-49c977e3eb66',
   '🌙': '290a44c2-d62e-4c05-8f3f-3bec0ab15c5f',
-  // pronouns - bonus
   '🎀': '1ed6f908-1034-484f-aabb-ef9cecbdf639',
   '🎧': '41123654-ca9c-49d9-9ce5-d30b5422347f',
   '🍓': 'e20aaf60-bee3-4f7a-8697-dc8707c2c632',
@@ -65,11 +61,11 @@ const EMOJI_TO_ROLE = {
   '💭': 'a2f16f42-07d9-4152-9c30-80e88bc373d9',
 };
 
-// ---- embeds ----
+// ---- embeds - ONE pink card only ----
 function welcomeEmbed(userId) {
   return new Embed()
     .title(`₊˚⊹ ୨୧ ♡ welc <@${userId}> to ⋆｡‧˚ʚ ᵃⁿᵍᵉˡᶜᵒʳᵉ ɞ˚‧｡⋆`)
-    .description(`hi angel !! ♡\n\n୨୧ read the rules first\n୨୧ pick ur roles in <#${ROLES_CHANNEL}> to unlock the server\n୨୧ u need **1 gender + 1 sexuality + 1 age** to verify\n୨୧ pronouns are just for fun, they don't count for verify\n\nonce u pick all 3, u get Member + the rest of the server unlocks !!`)
+    .description(`₊˚⊹ ୨୧ ♡ welc <@${userId}> to ⋆｡‧˚ʚ ᵃⁿᵍᵉˡᶜᵒʳᵉ ɞ˚‧｡⋆ @welcome ping !!\n\n-˚₊‧ rules | read before you speak\n-˚₊‧ roles | grab your yapper tags\n-˚₊‧ general | drop your hot takes\n\n♡₊ . hope you enjoy your stay . ₊♡\n\nangelcore • soft vibes only`)
     .color('#ffb6d9')
     .image(WELCOME_IMG);
 }
@@ -89,14 +85,12 @@ function getRoleIds(member) {
   return raw.map((r) => (typeof r === 'string' ? r : r.id)).filter(Boolean);
 }
 
-// ---- send helpers - pic FIRST, then text ----
+// ---- send helpers - ONE message only ----
 async function sendWelcome(userId) {
-  await bot.send(WELCOME_CHANNEL, WELCOME_IMG);
   await bot.send(WELCOME_CHANNEL, '', { embeds: [welcomeEmbed(userId)] });
 }
 
 async function sendUpdates(userId) {
-  await bot.send(UPDATES_CHANNEL, UPDATES_IMG);
   await bot.send(UPDATES_CHANNEL, '₊˚⊹ ʚ♡ɞ @everyone, a new angel has joined ʚ♡ɞ ⊹˚₊', { embeds: [updatesEmbed(userId)] });
 }
 
@@ -141,11 +135,9 @@ async function checkVerify(serverId, userId) {
     const member = await bot.member(serverId, userId);
     const roleIds = getRoleIds(member);
     if (roleIds.includes(MEMBER_ROLE)) return;
-
     const hasGender = GENDER_IDS.some((id) => roleIds.includes(id));
     const hasSexuality = SEXUALITY_IDS.some((id) => roleIds.includes(id));
     const hasAge = AGE_IDS.some((id) => roleIds.includes(id));
-
     if (hasGender && hasSexuality && hasAge) {
       await bot.addRole(serverId, userId, MEMBER_ROLE);
       await bot.removeRole(serverId, userId, UNVERIFIED_ROLE);
