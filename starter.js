@@ -8,6 +8,10 @@ const WELCOME_CH = 'b5e35ad5-6f23-4384-ad4e-6b09fd2199bc';
 const UNVERIFIED = 'ba5998d8-d325-42a9-88c4-1c215ade1474';
 const MEMBER = '314d903c-25ce-4d7a-9975-508a36adae88';
 
+// --- pics you picked - YAPIN links ---
+const WELCOME_IMAGE = 'https://files.yapper.website/attachments/ecdfb5fc-8862-4173-9121-acfd26b9d5a3/r2-1795311219548-46ldo3sx4s7zwh6njmox-t.webp';
+const UPDATE_IMAGE = 'https://files.yapper.website/attachments/ecdfb5fc-8862-4173-9121-acfd26b9d5a3/r2-1795311567047-wugp5ptxcrwxw5zabs8r-t.webp';
+
 // --- gender //
 const GENDER_ROLES = {
   '🤍': 'f16fc0a6-8645-4bdb-88ae-48594502568b',
@@ -15,16 +19,16 @@ const GENDER_ROLES = {
   '🩵': '5fa57823-4de2-4a7f-9813-b76d1ff841c0',
   '🪽': '469c2136-402f-46bd-96bb-61c43b738d31',
   '🎀': '782c1ebf-d759-4d2e-8403-e7efe6b810b1',
-  '☁️': 'ab2f95e3-a247-403f-aeb7-69831086be96',
+  '☁': 'ab2f95e3-a247-403f-aeb7-69831086be96',
 };
 
 // --- sexuality //
 const SEXUALITY_ROLES = {
-  '🕊️': 'c613876c-42c1-4966-925b-767f5c6a2fdb',
+  '🕊': 'c613876c-42c1-4966-925b-767f5c6a2fdb',
   '🪡': 'f7ef576e-3443-422c-8ce6-d48fb19fb0a6',
   '🦢': '29f19a50-59c8-4cd7-b091-7c2117d67fbc',
-  '🕯️': '0b1d76f2-f6b9-4e4f-8871-e20709c74dc1',
-  '🖊️': 'be209300-01c7-4247-866c-e71165441bb8',
+  '🕯': '0b1d76f2-f6b9-4e4f-8871-e20709c74dc1',
+  '🖊': 'be209300-01c7-4247-866c-e71165441bb8',
   '🧸': '11afff7d-9411-45da-bdea-52bd112f960b',
   '🌙': '0adc7c2f-21b9-4724-b930-8284f5c3b5c1',
 };
@@ -32,7 +36,7 @@ const SEXUALITY_ROLES = {
 // --- age //
 const AGE_ROLES = {
   '🦴': 'ca17b549-0174-4995-8a28-49c977e3eb66',
-  '⛓️': '290a44c2-d62e-4c05-8f3f-3bec0ab15c5f',
+  '⛓': '290a44c2-d62e-4c05-8f3f-3bec0ab15c5f',
 };
 
 // --- pronouns //
@@ -48,8 +52,6 @@ const userPicks = new Map();
 
 // helper so welcome is the same everywhere
 async function sendWelcome(userId) {
-  const user = await bot.user(userId).catch(() => null);
-  const avatar = user?.avatar_url || 'https://i.imgur.com/placeholder.png';
   const welcomeEmbed = new Embed()
     .title('₊˚⊹ ʚ♡ɞ welcome to angelcore ʚ♡ɞ ⊹˚₊')
     .description(
@@ -59,9 +61,10 @@ async function sendWelcome(userId) {
       `♡ ₊˚ ﹒ hope you enjoy your stay ﹒ ˚₊ ♡`
     )
     .color('#FFB6C1')
-    .thumbnail(avatar)
     .footer('angelcore • soft vibes only');
 
+  // GIF FIRST, then the welcome
+  await bot.send(WELCOME_CH, WELCOME_IMAGE);
   await bot.send(WELCOME_CH, 
     `₊˚⊹ ୨୧ ♡ welc <@${userId}> to ⋆｡‧˚ʚ ᵃⁿᵍᵉˡᶜᵒʳᵉ ɞ˚‧｡⋆ @welcome ping !!\n` +
     `-₊˚⊹・𝓇𝓊𝓁ℯ𝓈 | read before you speak\n` +
@@ -114,16 +117,14 @@ bot.on('reaction_add', async (r) => {
       await bot.addRole(GUILD_ID, r.user_id, MEMBER);
       await bot.send(ROLES_CH, `verified! welcome <@${r.user_id}> ʚ♡ɞ`);
 
-      const user = await bot.user(r.user_id).catch(() => null);
-      const avatar = user?.avatar_url || 'https://i.imgur.com/placeholder.png';
-
       const updateEmbed = new Embed()
         .title('₊˚⊹ ʚ♡ɞ a new angel joined ʚ♡ɞ ⊹˚₊')
         .description(`<@${r.user_id}> just joined angelcore ♡`)
         .color('#FFB6C1')
-        .thumbnail(avatar)
         .footer('angelcore');
 
+      // GIF FIRST, then the announce
+      await bot.send(UPDATES_CH, UPDATE_IMAGE);
       await bot.send(UPDATES_CH, `₊˚⊹ ʚ♡ɞ @everyone, a new angel has joined ʚ♡ɞ ⊹˚₊\n♡ ˚ . everyone welcome <@${r.user_id}> . ˚ ♡`, { embeds: [updateEmbed] });
 
       userPicks.delete(r.user_id);
