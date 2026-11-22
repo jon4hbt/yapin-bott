@@ -8,9 +8,9 @@ const WELCOME_CH = 'b5e35ad5-6f23-4384-ad4e-6b09fd2199bc';
 const UNVERIFIED = 'ba5998d8-d325-42a9-88c4-1c215ade1474';
 const MEMBER = '314d903c-25ce-4d7a-9975-508a36adae88';
 
-// --- pics you picked - YAPIN links ---
-const WELCOME_IMAGE = 'https://files.yapper.website/attachments/ecdfb5fc-8862-4173-9121-acfd26b9d5a3/r2-1795311219548-46ldo3sx4s7zwh6njmox-t.webp';
-const UPDATE_IMAGE = 'https://files.yapper.website/attachments/ecdfb5fc-8862-4173-9121-acfd26b9d5a3/r2-1795311567047-wugp5ptxcrwxw5zabs8r-t.webp';
+// --- pics you picked - IMGUR PNG links - CORRECTED ---
+const WELCOME_IMAGE = 'https://i.imgur.com/K38hlti.png';
+const UPDATE_IMAGE = 'https://i.imgur.com/yK4HwVu.png';
 
 // --- gender //
 const GENDER_ROLES = {
@@ -61,6 +61,7 @@ async function sendWelcome(userId) {
       `♡ ₊˚ ﹒ hope you enjoy your stay ﹒ ˚₊ ♡`
     )
     .color('#FFB6C1')
+    .thumbnail(WELCOME_IMAGE)
     .image(WELCOME_IMAGE)
     .footer('angelcore • soft vibes only');
 
@@ -120,6 +121,7 @@ bot.on('reaction_add', async (r) => {
         .title('₊˚⊹ ʚ♡ɞ a new angel joined ʚ♡ɞ ⊹˚₊')
         .description(`<@${r.user_id}> just joined angelcore ♡`)
         .color('#FFB6C1')
+        .thumbnail(UPDATE_IMAGE)
         .image(UPDATE_IMAGE)
         .footer('angelcore');
 
