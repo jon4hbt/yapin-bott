@@ -61,10 +61,10 @@ const EMOJI_TO_ROLE = {
   '💭': 'a2f16f42-07d9-4152-9c30-80e88bc373d9',
 };
 
-// ---- embeds - ONE pink card only ----
+// ---- embeds - ONE pink card, NO duplicate text ----
 function welcomeEmbed(userId) {
   return new Embed()
-    .title(`₊˚⊹ ୨୧ ♡ welc <@${userId}> to ⋆｡‧˚ʚ ᵃⁿᵍᵉˡᶜᵒʳᵉ ɞ˚‧｡⋆`)
+    .title('₊˚⊹ welcome to angelcore ♡')
     .description(`₊˚⊹ ୨୧ ♡ welc <@${userId}> to ⋆｡‧˚ʚ ᵃⁿᵍᵉˡᶜᵒʳᵉ ɞ˚‧｡⋆ @welcome ping !!\n\n-˚₊‧ rules | read before you speak\n-˚₊‧ roles | grab your yapper tags\n-˚₊‧ general | drop your hot takes\n\n♡₊ . hope you enjoy your stay . ₊♡\n\nangelcore • soft vibes only`)
     .color('#ffb6d9')
     .image(WELCOME_IMG);
@@ -91,7 +91,7 @@ async function sendWelcome(userId) {
 }
 
 async function sendUpdates(userId) {
-  await bot.send(UPDATES_CHANNEL, '₊˚⊹ ʚ♡ɞ @everyone, a new angel has joined ʚ♡ɞ ⊹˚₊', { embeds: [updatesEmbed(userId)] });
+  await bot.send(UPDATES_CHANNEL, '@everyone', { embeds: [updatesEmbed(userId)] });
 }
 
 // ---- bot ----
