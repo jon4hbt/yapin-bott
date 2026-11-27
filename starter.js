@@ -1,7 +1,5 @@
 import { Bot, Embed } from './yapper.js';
 
-// ---- Mack_2435 - angelcore verify-by-roles ----
-
 const WELCOME_IMG = 'https://files.yapper.website/attachments/ecdfb5fc-8862-4173-9121-acfd26b9d5a3/r2-1795311219548-46ldo3sx4s7zwh6njmox.webp';
 const UPDATES_IMG = 'https://files.yapper.website/attachments/ecdfb5fc-8862-4173-9121-acfd26b9d5a3/r2-1795311567047-wugp5ptxcrwxw5zabs8r.webp';
 
@@ -13,7 +11,6 @@ const ROLES_CHANNEL = '22384b40-536e-489d-a1d2-60469eec420a';
 const UNVERIFIED_ROLE = 'ba5998d8-d325-42a9-88c4-1c215ade1474';
 const MEMBER_ROLE = '314d903c-25ce-4d7a-9975-508a36adae88';
 
-// ---- roles ----
 const GENDER_IDS = [
   'f16fc0a6-8645-4bdb-88ae-48594502568b',
   '456aa22a-56dd-4a30-b932-5526e8eb6df3',
@@ -61,7 +58,7 @@ const EMOJI_TO_ROLE = {
   '💭': 'a2f16f42-07d9-4152-9c30-80e88bc373d9',
 };
 
-// ---- embeds - ONE pink card, NO duplicate text ----
+// ---- ONE pink card, text only ONCE ----
 function welcomeEmbed(userId) {
   return new Embed()
     .title('₊˚⊹ welcome to angelcore ♡')
@@ -85,7 +82,6 @@ function getRoleIds(member) {
   return raw.map((r) => (typeof r === 'string' ? r : r.id)).filter(Boolean);
 }
 
-// ---- send helpers - ONE message only ----
 async function sendWelcome(userId) {
   await bot.send(WELCOME_CHANNEL, '', { embeds: [welcomeEmbed(userId)] });
 }
@@ -94,20 +90,20 @@ async function sendUpdates(userId) {
   await bot.send(UPDATES_CHANNEL, '@everyone', { embeds: [updatesEmbed(userId)] });
 }
 
-// ---- bot ----
 const token = process.env.BOT_TOKEN || process.env.YAPPER_BOT_TOKEN;
 const bot = new Bot(token);
 
 bot.command('ping', 'Check the bot is alive', (msg) => msg.reply('pong ♡'));
 
+// FIX: ephemeral = only YOU see this, it does NOT post a 2nd message in #welcome
 bot.command('welcome', 'Test the welcome card', async (msg) => {
   await sendWelcome(msg.author_id);
-  await msg.reply('welcome test sent !!');
+  await msg.ephemeral('welcome test sent !! only you can see this');
 });
 
 bot.command('updates', 'Test the updates card', async (msg) => {
   await sendUpdates(msg.author_id);
-  await msg.reply('updates test sent !!');
+  await msg.ephemeral('updates test sent !! only you can see this');
 });
 
 bot.command('roles', 'Post the roles message', async (msg) => {
@@ -127,7 +123,7 @@ bot.command('roles', 'Post the roles message', async (msg) => {
       } catch {}
     }
   }
-  await msg.reply('roles message posted in #roles !!');
+  await msg.ephemeral('roles message posted in #roles !!');
 });
 
 async function checkVerify(serverId, userId) {
