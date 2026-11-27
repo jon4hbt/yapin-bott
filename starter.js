@@ -58,7 +58,7 @@ const EMOJI_TO_ROLE = {
   '💭': 'a2f16f42-07d9-4152-9c30-80e88bc373d9',
 };
 
-// ---- ONE pink card, text only ONCE ----
+// ---- ONE pink card, text ONLY inside it ----
 function welcomeEmbed(userId) {
   return new Embed()
     .title('₊˚⊹ welcome to angelcore ♡')
@@ -82,12 +82,25 @@ function getRoleIds(member) {
   return raw.map((r) => (typeof r === 'string' ? r : r.id)).filter(Boolean);
 }
 
+// download the pic and send it as a file IN THE SAME message as the pink card
+async function getImageFile(url, name) {
+  try {
+    const res = await fetch(url);
+    if (!res.ok) return null;
+    const bytes = new Uint8Array(await res.arrayBuffer());
+    return { name, data: bytes };
+  } catch { return null; }
+}
+
+// ONE message, NO content text above the card, so no duplicate
 async function sendWelcome(userId) {
-  await bot.send(WELCOME_CHANNEL, '', { embeds: [welcomeEmbed(userId)] });
+  const file = await getImageFile(WELCOME_IMG, 'welcome.webp');
+  await bot.send(WELCOME_CHANNEL, '', { embeds: [welcomeEmbed(userId)], files: file ? [file] : undefined });
 }
 
 async function sendUpdates(userId) {
-  await bot.send(UPDATES_CHANNEL, '@everyone', { embeds: [updatesEmbed(userId)] });
+  const file = await getImageFile(UPDATES_IMG, 'updates.webp');
+  await bot.send(UPDATES_CHANNEL, '@everyone', { embeds: [updatesEmbed(userId)], files: file ? [file] : undefined });
 }
 
 const token = process.env.BOT_TOKEN || process.env.YAPPER_BOT_TOKEN;
@@ -95,7 +108,6 @@ const bot = new Bot(token);
 
 bot.command('ping', 'Check the bot is alive', (msg) => msg.reply('pong ♡'));
 
-// FIX: ephemeral = only YOU see this, it does NOT post a 2nd message in #welcome
 bot.command('welcome', 'Test the welcome card', async (msg) => {
   await sendWelcome(msg.author_id);
   await msg.ephemeral('welcome test sent !! only you can see this');
@@ -185,3 +197,4 @@ bot.on('reaction_remove', async (ev) => {
 bot.on('error', (e) => console.error('[yapper]', e?.message || e));
 
 bot.start();
+
